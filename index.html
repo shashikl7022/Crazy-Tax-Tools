@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crazy Tax Tools - Professional Indian Tax & GST Suite</title>
+  <meta name="description" content="All-in-one Indian Tax & GST Calculator: Income Tax Old vs New Regime, GST inclusive/exclusive, ITC Reconciler, Section 50 Interest & Late Fee, TDS Master, and GST Tax Invoice Generator.">
+  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📈</text></svg>">
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header class="app-header">
+    <div class="header-container">
+      <a href="#dashboard" class="brand-wrapper">
+        <span class="brand-icon">💼</span>
+        <div class="brand-title">
+          Crazy Tax Tools
+          <span class="brand-tag">PRO FY 2025-26</span>
+        </div>
+      </a>
+
+      <!-- Main Navigation Tabs -->
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#dashboard" class="nav-link active" data-view="dashboard">📊 Dashboard</a></li>
+          <li><a href="#tax-tools" class="nav-link" data-view="tax-tools">🧮 Tax Calculators</a></li>
+          <li><a href="#documents" class="nav-link" data-view="documents">🧾 Invoices & Docs</a></li>
+          <li><a href="#reports" class="nav-link" data-view="reports">📈 Reports & Logs</a></li>
+          <li><a href="#settings" class="nav-link" data-view="settings">⚙️ Settings</a></li>
+        </ul>
+      </nav>
+
+      <!-- Action Bar -->
+      <div class="header-actions">
+        <span class="fy-badge">AY 2026-27</span>
+        <select class="theme-select" id="themeSelect" aria-label="Theme Selection">
+          <option value="dark">🌙 Dark Theme</option>
+          <option value="light">☀️ Light Theme</option>
+          <option value="emerald">🌲 Emerald Theme</option>
+        </select>
+        <a href="https://github.com/shashikl7022/Crazy-Tax-Tools" target="_blank" rel="noopener" class="btn btn-sm btn-secondary" title="View on GitHub">GitHub ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Application Body -->
+  <main class="main-container">
+
+    <!-- ========================================== -->
+    <!-- VIEW 1: DASHBOARD                          -->
+    <!-- ========================================== -->
+    <section id="view-dashboard" class="tab-view active">
+      <!-- Hero Banner -->
+      <div class="hero-banner">
+        <div class="hero-content">
+          <h1>Welcome to Crazy Tax Tools</h1>
+          <p>The fast, accurate, client-side taxation workstation for Indian CA, Tax Practitioners, Businesses, and Individuals.</p>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-pill">
+            <div class="stat-num">₹75,000</div>
+            <div class="stat-label">New Regime Std Ded</div>
+          </div>
+          <div class="stat-pill">
+            <div class="stat-num">18% p.a.</div>
+            <div class="stat-label">Sec 50 GST Interest</div>
+          </div>
+          <div class="stat-pill">
+            <div class="stat-num">100% Free</div>
+            <div class="stat-label">Zero Server Dependency</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Feature Launch Grid -->
+      <div class="grid-4col" style="margin-bottom: 1.5rem;">
+        <div class="feature-tile" onclick="location.hash='tax-tools'; document.querySelector('.subnav-btn[data-tool=income-tax]').click();">
+          <span class="tile-icon">💰</span>
+          <div class="tile-title">Income Tax Regimes</div>
+          <div class="tile-subtitle">Compare Old vs New Tax Regime with 80C, 80D, 24(b) & HRA.</div>
+        </div>
+        <div class="feature-tile" onclick="location.hash='tax-tools'; document.querySelector('.subnav-btn[data-tool=gst-calc]').click();">
+          <span class="tile-icon">🏷️</span>
+          <div class="tile-title">GST Slabs & Split</div>
+          <div class="tile-subtitle">Inclusive/Exclusive calculations with CGST, SGST & IGST split.</div>
+        </div>
+        <div class="feature-tile" onclick="location.hash='tax-tools'; document.querySelector('.subnav-btn[data-tool=itc-reconciler]').click();">
+          <span class="tile-icon">⚖️</span>
+          <div class="tile-title">ITC Set-off & 3B vs 2B</div>
+          <div class="tile-subtitle">Automatic credit utilization order & net cash challan calculation.</div>
+        </div>
+        <div class="feature-tile" onclick="location.hash='documents';">
+          <span class="tile-icon">🧾</span>
+          <div class="tile-title">GST Tax Invoice</div>
+          <div class="tile-subtitle">Generate GST-compliant tax invoices and export/print to PDF.</div>
+        </div>
+      </div>
+
+      <div class="grid-2col">
+        <!-- Tax Compliance Due Dates Calendar -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">📅 Monthly Tax Compliance Due Dates</h2>
+          </div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Due Date</th>
+                  <th>Form / Compliance</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong style="color: var(--primary);">7th of month</strong></td>
+                  <td>TDS / TCS Deposit</td>
+                  <td>Payment of TDS deducted in previous month (Challan 281)</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--primary);">11th of month</strong></td>
+                  <td>GSTR-1 (Monthly)</td>
+                  <td>Outward supplies for taxpayers with turnover &gt; ₹5 Cr or monthly filers</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--primary);">13th of month</strong></td>
+                  <td>GSTR-1 IFF (QRMP)</td>
+                  <td>Invoice Furnishing Facility for QRMP quarterly filers</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--warning);">20th of month</strong></td>
+                  <td>GSTR-3B (Monthly)</td>
+                  <td>Monthly summary return & tax payment via Cash/ITC</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--danger);">15th June/Sep/Dec/Mar</strong></td>
+                  <td>Advance Tax</td>
+                  <td>Installments: 15% (Jun), 45% (Sep), 75% (Dec), 100% (Mar)</td>
+                </tr>
+                <tr>
+                  <td><strong style="color: var(--success);">31st July</strong></td>
+                  <td>ITR Filing</td>
+                  <td>Individual / Non-audit Taxpayers Income Tax Return</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Quick Summary & Instructions -->
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">⚡ Quick Key Tax Rates Cheat-Sheet</h2>
+          </div>
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Head</th>
+                  <th>Particulars</th>
+                  <th>Rate</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>GST Slabs</strong></td>
+                  <td>Standard goods & services rates</td>
+                  <td class="font-mono">0%, 5%, 12%, 18%, 28%</td>
+                </tr>
+                <tr>
+                  <td><strong>GST Interest</strong></td>
+                  <td>Section 50(1) on delayed net cash payment</td>
+                  <td class="font-mono text-danger">18% p.a.</td>
+                </tr>
+                <tr>
+                  <td><strong>TDS 194C</strong></td>
+                  <td>Contractor payments (Individual / Firm)</td>
+                  <td class="font-mono">1% / 2%</td>
+                </tr>
+                <tr>
+                  <td><strong>TDS 194J</strong></td>
+                  <td>Technical (2%) / Professional (10%)</td>
+                  <td class="font-mono">2% / 10%</td>
+                </tr>
+                <tr>
+                  <td><strong>Income Tax Rebate</strong></td>
+                  <td>Section 87A (New Regime up to ₹7L)</td>
+                  <td class="font-mono text-success">Up to ₹25,000</td>
+                </tr>
+                <tr>
+                  <td><strong>Standard Deduction</strong></td>
+                  <td>Salaried (New vs Old Regime)</td>
+                  <td class="font-mono">₹75,000 / ₹50,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 2: TAX CALCULATORS                    -->
+    <!-- ========================================== -->
+    <section id="view-tax-tools" class="tab-view">
+      <!-- Sub-navigation for tools -->
+      <div class="subnav-tabs">
+        <button class="subnav-btn active" data-tool="income-tax">💰 Income Tax (Old vs New)</button>
+        <button class="subnav-btn" data-tool="gst-calc">🏷️ GST Calculator & Split</button>
+        <button class="subnav-btn" data-tool="itc-reconciler">⚖️ ITC & 3B Reconciler</button>
+        <button class="subnav-btn" data-tool="sec50-interest">⏱️ GST Interest & Late Fee</button>
+        <button class="subnav-btn" data-tool="tds-master">📋 TDS / TCS Master Rates</button>
+      </div>
+
+      <!-- TOOL 1: INCOME TAX (OLD VS NEW) -->
+      <div id="tool-income-tax" class="tool-panel active">
+        <div id="taxVerdictBanner" class="alert" style="margin-bottom: 1.25rem; padding: 1rem; border-radius: var(--radius-md);"></div>
+
+        <div class="grid-2col">
+          <!-- Input Form -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">📝 Income & Deduction Details</h2>
+              <button type="button" class="btn btn-sm btn-secondary" id="resetTaxBtn">Reset</button>
+            </div>
+
+            <form id="incomeTaxForm">
+              <div class="form-group">
+                <label class="form-label">Taxpayer Category</label>
+                <div class="radio-pill-group">
+                  <input type="radio" id="empSalaried" name="employmentType" value="salaried" checked>
+                  <label for="empSalaried">👔 Salaried</label>
+                  <input type="radio" id="empBusiness" name="employmentType" value="business">
+                  <label for="empBusiness">🏢 Business / Self-Employed</label>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="grossSalary">Gross Annual Salary / Income (₹)</label>
+                  <div class="input-prefix-wrap">
+                    <span class="input-prefix">₹</span>
+                    <input type="number" id="grossSalary" class="form-input font-mono" placeholder="1000000" value="1200000" min="0" step="10000">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="otherIncome">Other Income (Interest/Rental) (₹)</label>
+                  <div class="input-prefix-wrap">
+                    <span class="input-prefix">₹</span>
+                    <input type="number" id="otherIncome" class="form-input font-mono" placeholder="0" value="50000" min="0" step="5000">
+                  </div>
+                </div>
+              </div>
+
+              <h3 style="font-size: 0.95rem; margin: 1rem 0 0.5rem; color: var(--text-dim); text-transform: uppercase;">Exemptions & Deductions (For Old Regime)</h3>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="ded80C">Section 80C (PPF, ELSS, EPF, LIC)</label>
+                  <div class="input-prefix-wrap">
+                    <span class="input-prefix">₹</span>
+                    <input type="number" id="ded80C" class="form-input font-mono" placeholder="Max 1,50,000" value="150000" max="150000">
+                  </div>
+                  <div class="form-help">Statutory limit: ₹1,50,000</div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="ded80D">Section 80D (Health Insurance)</label>
+                  <div class="input-prefix-wrap">
+                    <span class="input-prefix">₹</span>
+                    <input type="number" id="ded80D" class="form-input font-mono" placeholder="e.g. 25000" value="25000" max="100000">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="ded24b">Section 24(b) (Home Loan Interest)</label>
+                  <div class="input-prefix-wrap">
+                    <span class="input-prefix">₹</span>
+                    <input type="number" id="ded24b" class="form-input font-mono" placeholder="Max 2,00,000" value="0" max="200000">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="dedHRA">HRA Exemption / 80GG</label>
+                  <div class="input-prefix-wrap">
+                    <span class="input-prefix">₹</span>
+                    <input type="number" id="dedHRA" class="form-input font-mono" placeholder="e.g. 60000" value="0">
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="dedOther">Other Deductions (80CCD, 80E, 80TTA)</label>
+                <div class="input-prefix-wrap">
+                  <span class="input-prefix">₹</span>
+                  <input type="number" id="dedOther" class="form-input font-mono" placeholder="0" value="0">
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Comparison Display -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">⚖️ Side-by-Side Tax Comparison</h2>
+            </div>
+
+            <div class="comparison-container">
+              <!-- New Regime Card -->
+              <div class="comparison-box" id="newRegimeBox">
+                <span class="badge-recommended" id="newRegimeBadge">Recommended</span>
+                <h3 style="font-size: 1.1rem; color: var(--primary);">New Tax Regime</h3>
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem;">Budget FY 2025-26 & 2026-27 Slabs</p>
+                
+                <div class="result-metric">
+                  <div class="stat-label">Total Tax Liability</div>
+                  <div class="result-val text-success" id="newTotalTaxDisplay">₹0</div>
+                </div>
+
+                <div class="data-table-wrap">
+                  <table class="data-table">
+                    <tbody>
+                      <tr>
+                        <td>Std. Deduction</td>
+                        <td class="font-mono text-right" id="newDedDisplay">₹75,000</td>
+                      </tr>
+                      <tr>
+                        <td>Taxable Income</td>
+                        <td class="font-mono text-right" id="newTaxableDisplay">₹0</td>
+                      </tr>
+                      <tr>
+                        <td>Sec 87A Rebate</td>
+                        <td class="font-mono text-right" id="newRebateDisplay">₹0</td>
+                      </tr>
+                      <tr>
+                        <td>Health & Ed. Cess (4%)</td>
+                        <td class="font-mono text-right" id="newCessDisplay">₹0</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- Old Regime Card -->
+              <div class="comparison-box" id="oldRegimeBox">
+                <span class="badge-recommended" id="oldRegimeBadge" style="display:none;">Recommended</span>
+                <h3 style="font-size: 1.1rem; color: var(--warning);">Old Tax Regime</h3>
+                <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 0.75rem;">With Slabs & Deductions (80C, 80D, etc.)</p>
+
+                <div class="result-metric">
+                  <div class="stat-label">Total Tax Liability</div>
+                  <div class="result-val text-warning" id="oldTotalTaxDisplay">₹0</div>
+                </div>
+
+                <div class="data-table-wrap">
+                  <table class="data-table">
+                    <tbody>
+                      <tr>
+                        <td>Total Deductions</td>
+                        <td class="font-mono text-right" id="oldDedDisplay">₹0</td>
+                      </tr>
+                      <tr>
+                        <td>Taxable Income</td>
+                        <td class="font-mono text-right" id="oldTaxableDisplay">₹0</td>
+                      </tr>
+                      <tr>
+                        <td>Sec 87A Rebate</td>
+                        <td class="font-mono text-right" id="oldRebateDisplay">₹0</td>
+                      </tr>
+                      <tr>
+                        <td>Health & Ed. Cess (4%)</td>
+                        <td class="font-mono text-right" id="oldCessDisplay">₹0</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: 1rem; font-size: 0.8rem; color: var(--text-dim);">
+              * Under New Tax Regime, no tax is payable if total taxable income is up to ₹7,00,000 (standard deduction gives effective tax-free threshold of ₹7,75,000).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOOL 2: GST CALCULATOR & SPLIT -->
+      <div id="tool-gst-calc" class="tool-panel">
+        <div class="grid-2col">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">🏷️ GST Amount & Rate Setup</h2>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="gstAmountInput">Transaction Amount (₹)</label>
+              <div class="input-prefix-wrap">
+                <span class="input-prefix">₹</span>
+                <input type="number" id="gstAmountInput" class="form-input font-mono" placeholder="10000" value="50000" min="0" step="100">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Calculation Mode</label>
+              <div class="radio-pill-group">
+                <input type="radio" id="gstTypeExclusive" name="gstCalcType" value="exclusive" checked>
+                <label for="gstTypeExclusive">➕ GST Exclusive (Amount + Tax)</label>
+                <input type="radio" id="gstTypeInclusive" name="gstCalcType" value="inclusive">
+                <label for="gstTypeInclusive">➖ GST Inclusive (Tax included)</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="gstRateSelect">GST Tax Slab</label>
+              <select id="gstRateSelect" class="form-select font-mono">
+                <option value="0">0% (Nil / Exempted)</option>
+                <option value="5">5% (Essential Commodities)</option>
+                <option value="12">12% (Standard Concessional)</option>
+                <option value="18" selected>18% (Standard Rate / Services)</option>
+                <option value="28">28% (Luxury / Sin Goods)</option>
+                <option value="custom">Custom Rate %</option>
+              </select>
+            </div>
+
+            <div class="form-group" id="customGstGroup" style="display: none;">
+              <label class="form-label" for="customGstInput">Enter Custom GST Rate (%)</label>
+              <input type="number" id="customGstInput" class="form-input font-mono" placeholder="e.g. 7.5" value="18" step="0.1">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Supply Type</label>
+              <div class="radio-pill-group">
+                <input type="radio" id="supplyIntra" name="supplyType" value="intra" checked>
+                <label for="supplyIntra">Intra-State (CGST + SGST)</label>
+                <input type="radio" id="supplyInter" name="supplyType" value="inter">
+                <label for="supplyInter">Inter-State (IGST)</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">📊 GST Tax Breakdown</h2>
+              <button type="button" class="btn btn-sm btn-secondary" id="copyGstSummaryBtn">📋 Copy Summary</button>
+            </div>
+
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <tbody>
+                  <tr>
+                    <td><strong>Base Price (Taxable Value)</strong></td>
+                    <td class="font-mono text-right" id="gstBaseDisplay" style="font-weight: 700; font-size: 1.1rem;">₹0.00</td>
+                  </tr>
+                  <tr id="cgstRow">
+                    <td>CGST (Central GST)</td>
+                    <td class="font-mono text-right" id="cgstDisplay">₹0.00</td>
+                  </tr>
+                  <tr id="sgstRow">
+                    <td>SGST (State GST)</td>
+                    <td class="font-mono text-right" id="sgstDisplay">₹0.00</td>
+                  </tr>
+                  <tr id="igstRow" style="display: none;">
+                    <td>IGST (Integrated GST)</td>
+                    <td class="font-mono text-right" id="igstDisplay">₹0.00</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Total GST Amount</strong></td>
+                    <td class="font-mono text-right text-warning" id="gstTotalTaxDisplay" style="font-weight: 700; font-size: 1.1rem;">₹0.00</td>
+                  </tr>
+                  <tr style="background: var(--bg-card);">
+                    <td><strong style="font-size: 1.05rem;">Final Invoice Amount</strong></td>
+                    <td class="font-mono text-right text-success" id="gstFinalAmountDisplay" style="font-weight: 800; font-size: 1.3rem;">₹0.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="card" style="background: var(--bg-card); margin-top: 1rem;">
+              <h4 style="font-size: 0.85rem; margin-bottom: 0.5rem; color: var(--text-dim);">Formula Applied:</h4>
+              <p style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--text-muted);">
+                Exclusive: GST = Value × (Rate / 100) <br>
+                Inclusive: Base = Total / (1 + Rate / 100)
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOOL 3: ITC & RECONCILIATION -->
+      <div id="tool-itc-reconciler" class="tool-panel">
+        <div class="card" style="margin-bottom: 1.25rem;">
+          <div class="card-header">
+            <h2 class="card-title">⚖️ Input Tax Credit (ITC) Set-Off Engine (GSTR-3B vs GSTR-2B)</h2>
+          </div>
+          <p class="card-desc">Automatically calculates tax set-off based on CGST Rule 88A (IGST credit utilization first against IGST, then CGST/SGST in any proportion, followed by CGST and SGST).</p>
+
+          <form id="itcForm">
+            <div class="grid-2col">
+              <!-- Outward Liability -->
+              <div class="card" style="background: var(--bg-card);">
+                <h3 style="font-size: 0.95rem; color: var(--danger); margin-bottom: 0.75rem;">1. Outward Tax Liability (GSTR-3B)</h3>
+                <div class="form-group">
+                  <label class="form-label" for="outIgst">IGST Output Liability (₹)</label>
+                  <input type="number" id="outIgst" class="form-input font-mono" value="45000" min="0">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="outCgst">CGST Output Liability (₹)</label>
+                  <input type="number" id="outCgst" class="form-input font-mono" value="30000" min="0">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="outSgst">SGST Output Liability (₹)</label>
+                  <input type="number" id="outSgst" class="form-input font-mono" value="30000" min="0">
+                </div>
+              </div>
+
+              <!-- Available ITC -->
+              <div class="card" style="background: var(--bg-card);">
+                <h3 style="font-size: 0.95rem; color: var(--success); margin-bottom: 0.75rem;">2. Eligible ITC Available (GSTR-2B)</h3>
+                <div class="form-group">
+                  <label class="form-label" for="itcIgst">IGST Credit Available (₹)</label>
+                  <input type="number" id="itcIgst" class="form-input font-mono" value="60000" min="0">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="itcCgst">CGST Credit Available (₹)</label>
+                  <input type="number" id="itcCgst" class="form-input font-mono" value="20000" min="0">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="itcSgst">SGST Credit Available (₹)</label>
+                  <input type="number" id="itcSgst" class="form-input font-mono" value="20000" min="0">
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <!-- Reconciliation Results -->
+          <div class="grid-2col" style="margin-top: 1.25rem;">
+            <div class="comparison-box" style="border-color: var(--danger);">
+              <h3 style="color: var(--danger);">💰 Net Cash Tax Payable (PMT-06)</h3>
+              <div class="result-metric">
+                <div class="stat-label">Total Cash Challan Required</div>
+                <div class="result-val text-danger" id="totalCashPayableDisplay">₹0.00</div>
+              </div>
+              <div class="data-table-wrap">
+                <table class="data-table">
+                  <tbody>
+                    <tr><td>Net IGST Payable in Cash</td><td class="font-mono text-right" id="netCashIgst">₹0.00</td></tr>
+                    <tr><td>Net CGST Payable in Cash</td><td class="font-mono text-right" id="netCashCgst">₹0.00</td></tr>
+                    <tr><td>Net SGST Payable in Cash</td><td class="font-mono text-right" id="netCashSgst">₹0.00</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="comparison-box" style="border-color: var(--success);">
+              <h3 style="color: var(--success);">📥 ITC Balance Carried Forward</h3>
+              <div class="result-metric">
+                <div class="stat-label">Total Unutilized Credit</div>
+                <div class="result-val text-success" id="totalBalanceItcDisplay">₹0.00</div>
+              </div>
+              <div class="data-table-wrap">
+                <table class="data-table">
+                  <tbody>
+                    <tr><td>Remaining IGST Credit</td><td class="font-mono text-right" id="remItcIgst">₹0.00</td></tr>
+                    <tr><td>Remaining CGST Credit</td><td class="font-mono text-right" id="remItcCgst">₹0.00</td></tr>
+                    <tr><td>Remaining SGST Credit</td><td class="font-mono text-right" id="remItcSgst">₹0.00</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOOL 4: GST INTEREST & LATE FEE (SECTION 50) -->
+      <div id="tool-sec50-interest" class="tool-panel">
+        <div class="grid-2col">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">⏱️ GST Interest (Sec 50) & Late Fee Calculator</h2>
+            </div>
+            <p class="card-desc">Calculates statutory interest @ 18% p.a. on delayed net cash payment and per-day late fees under GST Act.</p>
+
+            <div class="form-group">
+              <label class="form-label" for="netCashLiability">Net Tax Payable in Cash (₹)</label>
+              <input type="number" id="netCashLiability" class="form-input font-mono" placeholder="50000" value="40000" min="0">
+              <div class="form-help">Interest under Sec 50(1) applies only on net cash liability (not on ITC paid portion).</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="delayDays">Number of Days of Delay</label>
+              <input type="number" id="delayDays" class="form-input font-mono" placeholder="30" value="45" min="0">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Return Status</label>
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.35rem;">
+                <input type="checkbox" id="nilReturnCheck" style="width: 18px; height: 18px;">
+                <label for="nilReturnCheck" style="font-size: 0.9rem; cursor: pointer;">This was a <strong>Nil Return</strong> (No outward or inward supply)</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="turnoverSlab">Annual Aggregate Turnover (AATO)</label>
+              <select id="turnoverSlab" class="form-select">
+                <option value="low">Up to ₹1.5 Crores (Late fee max capped at ₹2,000)</option>
+                <option value="mid" selected>₹1.5 Crores to ₹5 Crores (Late fee max capped at ₹5,000)</option>
+                <option value="high">Above ₹5 Crores (Late fee max capped at ₹10,000)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">🧾 Interest & Penalty Summary</h2>
+            </div>
+
+            <div class="result-metric" style="margin: 1.5rem 0;">
+              <div class="stat-label">Total Statutory Dues</div>
+              <div class="result-val text-danger" id="totalPenaltyDisplay">₹0.00</div>
+            </div>
+
+            <div class="data-table-wrap">
+              <table class="data-table">
+                <tbody>
+                  <tr>
+                    <td><strong>Interest under Section 50(1)</strong><br><span style="font-size: 0.75rem; color: var(--text-dim);">18% p.a. on Cash Liability for delayed days</span></td>
+                    <td class="font-mono text-right text-danger" id="interestAmountDisplay" style="font-weight: 700;">₹0.00</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Late Fee</strong><br><span style="font-size: 0.75rem; color: var(--text-dim);">₹50/day (₹20 for Nil return) subject to statutory cap</span></td>
+                    <td class="font-mono text-right text-warning" id="lateFeeDisplay" style="font-weight: 700;">₹0.00</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="card" style="background: var(--bg-card); margin-top: 1rem;">
+              <h4 style="font-size: 0.85rem; margin-bottom: 0.4rem; color: var(--text-dim);">Statutory Reference:</h4>
+              <p style="font-size: 0.8rem; color: var(--text-muted);">
+                Proviso to Section 50(1) inserted by Finance Act clarifies interest is payable only on the portion of tax paid through Electronic Cash Ledger.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOOL 5: TDS / TCS MASTER -->
+      <div id="tool-tds-master" class="tool-panel">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">📋 TDS & TCS Master Rate Directory (FY 2025-26 / 2026-27)</h2>
+            <div style="width: 260px;">
+              <input type="text" id="tdsSearchInput" class="form-input" placeholder="🔍 Search section or keyword..." autocomplete="off">
+            </div>
+          </div>
+
+          <div class="data-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Section</th>
+                  <th>Nature of Payment</th>
+                  <th>Threshold Limit</th>
+                  <th class="text-center">Ind / HUF Rate</th>
+                  <th class="text-center">Firm / Co Rate</th>
+                  <th class="text-center">Without PAN (206AA)</th>
+                </tr>
+              </thead>
+              <tbody id="tdsTableBody">
+                <!-- Dynamically injected by app.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 3: INVOICES & DOCUMENTS               -->
+    <!-- ========================================== -->
+    <section id="view-documents" class="tab-view">
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <div class="card-header no-print">
+          <h2 class="card-title">🧾 GST Compliant Tax Invoice Generator</h2>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="btn btn-secondary" id="addInvoiceItemBtn" type="button">➕ Add Line Item</button>
+            <button class="btn btn-primary" id="printInvoiceBtn" type="button">🖨️ Print / Save as PDF</button>
+          </div>
+        </div>
+
+        <!-- Printable Invoice Canvas -->
+        <div class="invoice-paper" id="invoiceArea">
+          <div class="invoice-header-grid">
+            <div class="invoice-brand">
+              <h2>TAX CONSULTANCY SERVICES</h2>
+              <p style="color: #64748b; font-size: 0.85rem;">GST & Financial Advisory Firm</p>
+              <p style="margin-top: 0.5rem;"><strong>GSTIN:</strong> 29AALCA7487K1Z4<br>
+              <strong>PAN:</strong> AALCA7487K<br>
+              <strong>Email:</strong> contact@crazytaxtools.com</p>
+            </div>
+            <div class="invoice-meta">
+              <h1 style="font-size: 1.8rem; color: #0f172a; margin-bottom: 0.5rem;">TAX INVOICE</h1>
+              <p><strong>Invoice No:</strong> CTT/2026-27/042<br>
+              <strong>Date:</strong> 15-Sep-2026<br>
+              <strong>Place of Supply:</strong> 29-Karnataka<br>
+              <strong>Reverse Charge (RCM):</strong> No</p>
+            </div>
+          </div>
+
+          <!-- Bill To / Ship To -->
+          <div class="invoice-parties">
+            <div class="party-box">
+              <div class="party-title">Billed To (Client Details):</div>
+              <p><strong>Client Name:</strong> Teleflex Global Solutions Pvt Ltd<br>
+              <strong>Address:</strong> Tech Park, 4th Cross, Outer Ring Road, Bangalore - 560103<br>
+              <strong>GSTIN:</strong> 29ABCDE1234F1Z5<br>
+              <strong>State:</strong> Karnataka (Code 29)</p>
+            </div>
+            <div class="party-box">
+              <div class="party-title">Payment / Bank Details:</div>
+              <p><strong>Bank Name:</strong> HDFC Bank Ltd<br>
+              <strong>A/C No:</strong> 50200012345678<br>
+              <strong>IFSC Code:</strong> HDFC0001234<br>
+              <strong>Branch:</strong> Indiranagar, Bangalore</p>
+            </div>
+          </div>
+
+          <!-- Invoice Line Items -->
+          <table class="invoice-table">
+            <thead>
+              <tr>
+                <th style="width: 40%;">Description of Services / Goods</th>
+                <th style="width: 15%;">HSN / SAC</th>
+                <th style="width: 10%;" class="text-right">Qty</th>
+                <th style="width: 15%;" class="text-right">Rate (₹)</th>
+                <th style="width: 10%;">GST %</th>
+                <th style="width: 15%;" class="text-right">Amount (₹)</th>
+                <th class="no-print" style="width: 5%;"></th>
+              </tr>
+            </thead>
+            <tbody id="invoiceItemsBody">
+              <!-- Dynamically managed rows -->
+            </tbody>
+          </table>
+
+          <!-- Totals -->
+          <div style="display: flex; justify-content: flex-end; margin-top: 1.5rem;">
+            <table class="invoice-totals">
+              <tbody>
+                <tr>
+                  <td>Subtotal (Taxable Value):</td>
+                  <td class="font-mono text-right" id="invSubtotalDisplay">₹0.00</td>
+                </tr>
+                <tr>
+                  <td>Total GST:</td>
+                  <td class="font-mono text-right" id="invGstDisplay">₹0.00</td>
+                </tr>
+                <tr class="grand-total-row">
+                  <td>Grand Total:</td>
+                  <td class="font-mono text-right" id="invGrandTotalDisplay" style="color: #2563eb;">₹0.00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Invoice Footer -->
+          <div style="margin-top: 3rem; border-top: 1px solid #e2e8f0; padding-top: 1rem; display: flex; justify-content: space-between; font-size: 0.8rem; color: #64748b;">
+            <div>
+              <p><strong>Terms & Conditions:</strong><br>Payment is due within 15 days of invoice date.</p>
+            </div>
+            <div style="text-align: right;">
+              <p>For <strong>TAX CONSULTANCY SERVICES</strong><br><br><br>Authorized Signatory</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 4: REPORTS & CALCULATION LOGS         -->
+    <!-- ========================================== -->
+    <section id="view-reports" class="tab-view">
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">📜 Session Calculation History</h2>
+            <div style="display: flex; gap: 0.5rem;">
+              <button class="btn btn-sm btn-secondary" id="exportCsvBtn">📥 Export CSV</button>
+              <button class="btn btn-sm btn-secondary" id="clearHistoryBtn">Clear</button>
+            </div>
+          </div>
+          <p class="card-desc">All calculations performed in this session are safely recorded in your browser's private storage.</p>
+
+          <ul id="historyList" style="list-style: none; padding: 0;">
+            <!-- Rendered by app.js -->
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">📝 Tax Planning Notes & Scratchpad</h2>
+          </div>
+          <p class="card-desc">Write quick computation notes, client remarks, or filing checklists. Auto-saved locally.</p>
+          <textarea id="taxNotesArea" class="form-textarea" style="height: 280px;" placeholder="Type audit notes, client reminders, or tax computation workings here..."></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- VIEW 5: SETTINGS                           -->
+    <!-- ========================================== -->
+    <section id="view-settings" class="tab-view">
+      <div class="card" style="max-width: 680px; margin: 0 auto;">
+        <div class="card-header">
+          <h2 class="card-title">⚙️ Application Preferences & Hosting</h2>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Deployment Architecture</label>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+            Crazy Tax Tools is engineered with dual-capability:
+          </p>
+          <ul style="padding-left: 1.5rem; font-size: 0.85rem; color: var(--text-muted); line-height: 1.7;">
+            <li><strong>100% Free Hosting on GitHub Pages:</strong> The entire application runs client-side from <code>index.html</code> with zero backend costs or server maintenance.</li>
+            <li><strong>Python Flask Server:</strong> Run <code>python app.py</code> for local server hosting or cloud deployment to Render / Heroku / Vercel.</li>
+          </ul>
+        </div>
+
+        <div class="form-group" style="margin-top: 1.5rem;">
+          <label class="form-label">About This Project</label>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">
+            Repository: <a href="https://github.com/shashikl7022/Crazy-Tax-Tools" target="_blank" rel="noopener" style="color: var(--primary);">github.com/shashikl7022/Crazy-Tax-Tools</a><br>
+            Version: 1.0.0 Pro • Indian Tax Year: FY 2025-26 / AY 2026-27.
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast Notification Area -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- App Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>💼 <strong>Crazy Tax Tools</strong> • Designed for Indian Taxation, GST, and Accounting Professionals</p>
+      <div class="footer-links">
+        <a href="#dashboard" class="footer-link" onclick="location.hash='dashboard'">Dashboard</a>
+        <a href="#tax-tools" class="footer-link" onclick="location.hash='tax-tools'">Tax Calculators</a>
+        <a href="#documents" class="footer-link" onclick="location.hash='documents'">GST Invoice</a>
+        <a href="https://github.com/shashikl7022/Crazy-Tax-Tools" target="_blank" rel="noopener" class="footer-link">GitHub Repository</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="static/js/app.js"></script>
+</body>
+</html>
