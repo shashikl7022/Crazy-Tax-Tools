@@ -6,6 +6,900 @@
   <title>Crazy Tax Tools - Professional Indian Tax & GST Suite</title>
   <meta name="description" content="All-in-one Indian Tax & GST Calculator: Income Tax Old vs New Regime, GST inclusive/exclusive, ITC Reconciler, Section 50 Interest & Late Fee, TDS Master, and GST Tax Invoice Generator.">
   <link rel="stylesheet" href="static/css/style.css">
+  <style>
+/* ==========================================================================
+   CRAZY TAX TOOLS - MODERN FINTECH STYLESHEET
+   ========================================================================== */
+
+:root {
+  /* Dark Theme (Default) */
+  --bg-main: #0b1120;
+  --bg-surface: #131d33;
+  --bg-card: #18233c;
+  --bg-card-hover: #1e2c4a;
+  --bg-input: #0e172a;
+  
+  --border-color: #233354;
+  --border-focus: #3b82f6;
+  
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-glow: rgba(37, 99, 235, 0.25);
+  
+  --success: #10b981;
+  --success-bg: rgba(16, 185, 129, 0.15);
+  --warning: #f59e0b;
+  --warning-bg: rgba(245, 158, 11, 0.15);
+  --danger: #ef4444;
+  --danger-bg: rgba(239, 68, 68, 0.15);
+  --info: #06b6d4;
+  
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SF Mono", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-full: 9999px;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -2px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+  
+  --transition: all 0.2s ease-in-out;
+}
+
+/* Light Theme */
+[data-theme="light"] {
+  --bg-main: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-card: #f1f5f9;
+  --bg-card-hover: #e2e8f0;
+  --bg-input: #ffffff;
+  --border-color: #cbd5e1;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --text-dim: #94a3b8;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-glow: rgba(37, 99, 235, 0.15);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Emerald Theme */
+[data-theme="emerald"] {
+  --bg-main: #062419;
+  --bg-surface: #0a3627;
+  --bg-card: #0f4432;
+  --bg-card-hover: #14533e;
+  --bg-input: #082a1e;
+  --border-color: #17654a;
+  --primary: #10b981;
+  --primary-hover: #059669;
+  --primary-glow: rgba(16, 185, 129, 0.25);
+  --text-main: #f0fdf4;
+  --text-muted: #86efac;
+}
+
+/* Base Resets */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 15px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header & Navigation */
+.app-header {
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+}
+
+.header-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-icon {
+  font-size: 1.75rem;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.brand-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: var(--primary);
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  color: var(--text-main);
+  background: var(--bg-card);
+}
+
+.nav-link.active {
+  color: #fff;
+  background: var(--primary);
+  box-shadow: 0 0 12px var(--primary-glow);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.fy-badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-md);
+  color: var(--warning);
+}
+
+/* Theme Selector */
+.theme-select {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* Layout Container */
+.main-container {
+  max-width: 1240px;
+  margin: 1.5rem auto;
+  padding: 0 1.25rem;
+  flex: 1;
+  width: 100%;
+}
+
+/* Hero Section */
+.hero-banner {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%), var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-md);
+}
+
+.hero-content h1 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 0.25rem;
+}
+
+.hero-content p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.stat-pill {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--success);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+/* Sub-nav Tabs (for tools) */
+.subnav-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.subnav-btn {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.subnav-btn:hover {
+  color: var(--text-main);
+  background: var(--bg-card);
+}
+
+.subnav-btn.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 0 10px var(--primary-glow);
+}
+
+/* Tab Views */
+.tab-view {
+  display: none;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+.tab-view.active {
+  display: block;
+}
+
+.tool-panel {
+  display: none;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.tool-panel.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Grid Layouts */
+.grid-2col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.grid-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.grid-4col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+/* Card Component */
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  position: relative;
+}
+
+.card:hover {
+  border-color: rgba(59, 130, 246, 0.4);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-desc {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+/* Quick Action / Feature Tiles */
+.feature-tile {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.feature-tile:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+  background: var(--bg-card-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.tile-icon {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+.tile-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.tile-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Forms & Inputs */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--text-main);
+}
+
+.form-help {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: 0.25rem;
+}
+
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: var(--transition);
+  outline: none;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+
+.input-prefix-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-prefix {
+  position: absolute;
+  left: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+.input-prefix-wrap .form-input {
+  padding-left: 2rem;
+}
+
+/* Radio Group / Pill Switchers */
+.radio-pill-group {
+  display: flex;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 3px;
+  gap: 3px;
+}
+
+.radio-pill-group label {
+  flex: 1;
+  text-align: center;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+  user-select: none;
+}
+
+.radio-pill-group input[type="radio"] {
+  display: none;
+}
+
+.radio-pill-group input[type="radio"]:checked + label {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: var(--transition);
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  box-shadow: 0 0 12px var(--primary-glow);
+}
+
+.btn-secondary {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+  color: var(--text-main);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--text-muted);
+}
+
+.btn-success {
+  background: var(--success);
+  color: #fff;
+}
+
+.btn-success:hover {
+  filter: brightness(1.1);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+
+.btn-sm {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* Comparison Result Cards */
+.comparison-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.comparison-box {
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  position: relative;
+  transition: var(--transition);
+}
+
+.comparison-box.recommended {
+  border-color: var(--success);
+  box-shadow: 0 0 16px var(--success-bg);
+}
+
+.badge-recommended {
+  position: absolute;
+  top: -10px;
+  right: 15px;
+  background: var(--success);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.result-metric {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.result-val {
+  font-size: 1.75rem;
+  font-weight: 800;
+  font-family: var(--font-mono);
+}
+
+.result-val.text-success {
+  color: var(--success);
+}
+
+.result-val.text-warning {
+  color: var(--warning);
+}
+
+.result-val.text-danger {
+  color: var(--danger);
+}
+
+/* Detail Table */
+.data-table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+.data-table th, .data-table td {
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.data-table th {
+  background: var(--bg-card);
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tr:hover td {
+  background: var(--bg-card-hover);
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Invoice Specific Styles */
+.invoice-paper {
+  background: #ffffff;
+  color: #1e293b;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-lg);
+  font-size: 0.9rem;
+}
+
+.invoice-header-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 1.5rem;
+}
+
+.invoice-brand h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.invoice-meta {
+  text-align: right;
+}
+
+.invoice-parties {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.party-box {
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid #e2e8f0;
+}
+
+.party-title {
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.invoice-table th, .invoice-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.invoice-table th {
+  background: #f1f5f9;
+  font-weight: 700;
+  color: #334155;
+  font-size: 0.8rem;
+}
+
+.invoice-totals {
+  margin-left: auto;
+  width: 320px;
+  border-collapse: collapse;
+}
+
+.invoice-totals td {
+  padding: 0.5rem;
+}
+
+.grand-total-row {
+  border-top: 2px solid #0f172a;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+/* Toast Notification */
+.toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.toast {
+  background: var(--bg-surface);
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-lg);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  animation: slideIn 0.3s ease;
+}
+
+.toast.toast-success {
+  border-left: 4px solid var(--success);
+}
+
+.toast.toast-danger {
+  border-left: 4px solid var(--danger);
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Footer */
+.app-footer {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-color);
+  padding: 1.5rem 0;
+  margin-top: 3rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.footer-link {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: var(--primary);
+}
+
+/* Print Stylesheet for Invoices */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .app-header, .subnav-tabs, .btn, .no-print, .app-footer, .hero-banner {
+    display: none !important;
+  }
+  .main-container {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+  .invoice-paper {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 900px) {
+  .grid-2col, .grid-3col, .grid-4col, .comparison-container, .hero-banner {
+    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .hero-stats {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+  .header-container {
+    flex-wrap: wrap;
+  }
+  .nav-links {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    padding: 0.25rem 0;
+  }
+  .invoice-header-grid, .invoice-parties {
+    grid-template-columns: 1fr;
+  }
+  .invoice-totals {
+    width: 100%;
+  }
+}
+
+  </style>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📈</text></svg>">
 </head>
 <body>
@@ -860,5 +1754,764 @@
   </footer>
 
   <script src="static/js/app.js"></script>
+  <script>
+/**
+ * CRAZY TAX TOOLS - CORE CLIENT-SIDE ENGINE
+ * Indian Tax & GST Comprehensive Suite
+ */
+
+(function () {
+  "use strict";
+
+  // --- Utility Functions ---
+  var formatINR = function (val) {
+    if (isNaN(val) || val === null) return "₹0";
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 2,
+    }).format(val);
+  };
+
+  var parseNum = function (val) {
+    var n = parseFloat(val);
+    return isNaN(n) ? 0 : n;
+  };
+
+  // Toast Notification
+  var showToast = function (msg, type) {
+    if (!type) type = "success";
+    var container = document.getElementById("toastContainer");
+    if (!container) return;
+    var toast = document.createElement("div");
+    toast.className = "toast toast-" + type;
+    toast.innerHTML = "<span>" + (type === "success" ? "✓" : "⚠") + "</span> <span>" + msg + "</span>";
+    container.appendChild(toast);
+    setTimeout(function () {
+      toast.style.opacity = "0";
+      toast.style.transform = "translateX(100%)";
+      toast.style.transition = "all 0.3s ease";
+      setTimeout(function () {
+        if (toast.parentNode) toast.remove();
+      }, 300);
+    }, 3200);
+  };
+
+  // --- Navigation & View Switching ---
+  var initNavigation = function () {
+    var navLinks = document.querySelectorAll(".nav-link[data-view]");
+    var tabViews = document.querySelectorAll(".tab-view");
+
+    var switchView = function (targetView) {
+      navLinks.forEach(function (link) {
+        link.classList.toggle("active", link.getAttribute("data-view") === targetView);
+      });
+      tabViews.forEach(function (view) {
+        view.classList.toggle("active", view.id === "view-" + targetView);
+      });
+      window.location.hash = targetView;
+    };
+
+    navLinks.forEach(function (link) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        var target = link.getAttribute("data-view");
+        switchView(target);
+      });
+    });
+
+    // Sub-nav for tax tools
+    var subnavBtns = document.querySelectorAll(".subnav-btn[data-tool]");
+    var toolPanels = document.querySelectorAll(".tool-panel");
+
+    var switchTool = function (targetTool) {
+      subnavBtns.forEach(function (btn) {
+        btn.classList.toggle("active", btn.getAttribute("data-tool") === targetTool);
+      });
+      toolPanels.forEach(function (panel) {
+        panel.classList.toggle("active", panel.id === "tool-" + targetTool);
+      });
+    };
+
+    subnavBtns.forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        var target = btn.getAttribute("data-tool");
+        switchTool(target);
+      });
+    });
+
+    // Direct Hash Routing
+    if (window.location.hash) {
+      var hash = window.location.hash.replace("#", "");
+      if (document.getElementById("view-" + hash)) {
+        switchView(hash);
+      }
+    }
+  };
+
+  // --- Theme Management ---
+  var initTheme = function () {
+    var themeSelect = document.getElementById("themeSelect");
+    var savedTheme = localStorage.getItem("crazy_tax_theme") || "dark";
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    if (themeSelect) {
+      themeSelect.value = savedTheme;
+      themeSelect.addEventListener("change", function (e) {
+        var theme = e.target.value;
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("crazy_tax_theme", theme);
+        showToast("Theme changed to " + theme);
+      });
+    }
+  };
+
+  // --- 1. INCOME TAX ENGINE (Old vs New Regime) ---
+  var initIncomeTax = function () {
+    var form = document.getElementById("incomeTaxForm");
+    if (!form) return;
+
+    var calcIncomeTax = function () {
+      var grossIncome = parseNum(document.getElementById("grossSalary").value);
+      var otherIncome = parseNum(document.getElementById("otherIncome").value);
+      var isSalaried = document.getElementById("empSalaried").checked;
+      
+      var sec80C = Math.min(parseNum(document.getElementById("ded80C").value), 150000);
+      var sec80D = Math.min(parseNum(document.getElementById("ded80D").value), 100000);
+      var sec24b = Math.min(parseNum(document.getElementById("ded24b").value), 200000);
+      var hraExempt = parseNum(document.getElementById("dedHRA").value);
+      var otherDed = parseNum(document.getElementById("dedOther").value);
+
+      var totalGross = grossIncome + otherIncome;
+
+      // --- OLD REGIME CALCULATION ---
+      var oldStdDed = isSalaried ? 50000 : 0;
+      var oldTotalDeductions = oldStdDed + sec80C + sec80D + sec24b + hraExempt + otherDed;
+      var oldTaxableIncome = Math.max(0, totalGross - oldTotalDeductions);
+
+      var oldTax = 0;
+      if (oldTaxableIncome <= 250000) {
+        oldTax = 0;
+      } else if (oldTaxableIncome <= 500000) {
+        oldTax = (oldTaxableIncome - 250000) * 0.05;
+      } else if (oldTaxableIncome <= 1000000) {
+        oldTax = 12500 + (oldTaxableIncome - 500000) * 0.20;
+      } else {
+        oldTax = 112500 + (oldTaxableIncome - 1000000) * 0.30;
+      }
+
+      // Sec 87A Rebate for Old Regime (taxable income <= 5L)
+      var oldRebate = 0;
+      if (oldTaxableIncome <= 500000) {
+        oldRebate = Math.min(oldTax, 12500);
+        oldTax = Math.max(0, oldTax - oldRebate);
+      }
+      var oldCess = oldTax * 0.04;
+      var oldTotalTax = oldTax + oldCess;
+
+      // --- NEW REGIME CALCULATION (FY 2025-26 / 2026-27 Slabs) ---
+      // Standard deduction: 75,000 for salaried
+      var newStdDed = isSalaried ? 75000 : 0;
+      var newTaxableIncome = Math.max(0, totalGross - newStdDed);
+
+      var newTax = 0;
+      if (newTaxableIncome <= 300000) {
+        newTax = 0;
+      } else if (newTaxableIncome <= 700000) {
+        newTax = (newTaxableIncome - 300000) * 0.05;
+      } else if (newTaxableIncome <= 1000000) {
+        newTax = 20000 + (newTaxableIncome - 700000) * 0.10;
+      } else if (newTaxableIncome <= 1200000) {
+        newTax = 50000 + (newTaxableIncome - 1000000) * 0.15;
+      } else if (newTaxableIncome <= 1500000) {
+        newTax = 80000 + (newTaxableIncome - 1200000) * 0.20;
+      } else {
+        newTax = 140000 + (newTaxableIncome - 1500000) * 0.30;
+      }
+
+      // Sec 87A Rebate for New Regime (taxable income <= 7,00,000 gets full rebate)
+      var newRebate = 0;
+      if (newTaxableIncome <= 700000) {
+        newRebate = newTax;
+        newTax = 0;
+      } else if (newTaxableIncome > 700000 && newTaxableIncome <= 727777) {
+        // Marginal relief under Section 87A
+        var excessIncome = newTaxableIncome - 700000;
+        if (newTax > excessIncome) {
+          newRebate = newTax - excessIncome;
+          newTax = excessIncome;
+        }
+      }
+
+      var newCess = newTax * 0.04;
+      var newTotalTax = newTax + newCess;
+
+      // Render Old Regime Results
+      document.getElementById("oldTaxableDisplay").textContent = formatINR(oldTaxableIncome);
+      document.getElementById("oldDedDisplay").textContent = formatINR(oldTotalDeductions);
+      document.getElementById("oldRebateDisplay").textContent = formatINR(oldRebate);
+      document.getElementById("oldCessDisplay").textContent = formatINR(oldCess);
+      document.getElementById("oldTotalTaxDisplay").textContent = formatINR(oldTotalTax);
+
+      // Render New Regime Results
+      document.getElementById("newTaxableDisplay").textContent = formatINR(newTaxableIncome);
+      document.getElementById("newDedDisplay").textContent = formatINR(newStdDed);
+      document.getElementById("newRebateDisplay").textContent = formatINR(newRebate);
+      document.getElementById("newCessDisplay").textContent = formatINR(newCess);
+      document.getElementById("newTotalTaxDisplay").textContent = formatINR(newTotalTax);
+
+      // Recommendations & Comparison
+      var oldBox = document.getElementById("oldRegimeBox");
+      var newBox = document.getElementById("newRegimeBox");
+      var oldBadge = document.getElementById("oldRegimeBadge");
+      var newBadge = document.getElementById("newRegimeBadge");
+      var verdictBanner = document.getElementById("taxVerdictBanner");
+
+      oldBox.classList.remove("recommended");
+      newBox.classList.remove("recommended");
+      oldBadge.style.display = "none";
+      newBadge.style.display = "none";
+
+      var diff = Math.abs(oldTotalTax - newTotalTax);
+      if (newTotalTax < oldTotalTax) {
+        newBox.classList.add("recommended");
+        newBadge.style.display = "inline-block";
+        verdictBanner.className = "alert alert-success";
+        verdictBanner.innerHTML = "<strong>🌟 New Tax Regime is Recommended!</strong> You will save <strong>" + formatINR(diff) + "</strong> under the New Regime.";
+      } else if (oldTotalTax < newTotalTax) {
+        oldBox.classList.add("recommended");
+        oldBadge.style.display = "inline-block";
+        verdictBanner.className = "alert alert-success";
+        verdictBanner.innerHTML = "<strong>🌟 Old Tax Regime is Recommended!</strong> You will save <strong>" + formatINR(diff) + "</strong> under the Old Regime due to your deductions.";
+      } else {
+        verdictBanner.className = "alert alert-info";
+        verdictBanner.innerHTML = "<strong>Equal Tax Liability!</strong> Both regimes result in the exact same tax of <strong>" + formatINR(oldTotalTax) + "</strong>.";
+      }
+
+      saveHistory("Income Tax", "Income: " + formatINR(totalGross) + " | New: " + formatINR(newTotalTax) + " vs Old: " + formatINR(oldTotalTax));
+    };
+
+    form.querySelectorAll("input").forEach(function (input) {
+      input.addEventListener("input", calcIncomeTax);
+      input.addEventListener("change", calcIncomeTax);
+    });
+
+    var resetBtn = document.getElementById("resetTaxBtn");
+    if (resetBtn) {
+      resetBtn.addEventListener("click", function () {
+        form.reset();
+        calcIncomeTax();
+        showToast("Income Tax inputs reset");
+      });
+    }
+
+    calcIncomeTax();
+  };
+
+  // --- 2. GST RATE & SPLIT CALCULATOR ---
+  var initGstCalculator = function () {
+    var amountInput = document.getElementById("gstAmountInput");
+    var rateSelect = document.getElementById("gstRateSelect");
+    var customRateGroup = document.getElementById("customGstGroup");
+    var customRateInput = document.getElementById("customGstInput");
+    var typeInclusive = document.getElementById("gstTypeInclusive");
+    var supplyIntra = document.getElementById("supplyIntra");
+
+    if (!amountInput) return;
+
+    var calcGST = function () {
+      var amount = parseNum(amountInput.value);
+      var rate = parseNum(rateSelect.value);
+
+      if (rateSelect.value === "custom") {
+        customRateGroup.style.display = "block";
+        rate = parseNum(customRateInput.value);
+      } else {
+        customRateGroup.style.display = "none";
+      }
+
+      var isInclusive = typeInclusive.checked;
+      var isIntraState = supplyIntra.checked;
+
+      var baseAmount = 0;
+      var totalGst = 0;
+      var totalAmount = 0;
+
+      if (isInclusive) {
+        // Formula: Base = Total / (1 + Rate / 100)
+        baseAmount = amount / (1 + rate / 100);
+        totalGst = amount - baseAmount;
+        totalAmount = amount;
+      } else {
+        // Formula: GST = Base * (Rate / 100)
+        baseAmount = amount;
+        totalGst = amount * (rate / 100);
+        totalAmount = amount + totalGst;
+      }
+
+      var cgst = 0, sgst = 0, igst = 0;
+      if (isIntraState) {
+        cgst = totalGst / 2;
+        sgst = totalGst / 2;
+        igst = 0;
+      } else {
+        cgst = 0;
+        sgst = 0;
+        igst = totalGst;
+      }
+
+      document.getElementById("gstBaseDisplay").textContent = formatINR(baseAmount);
+      document.getElementById("gstTotalTaxDisplay").textContent = formatINR(totalGst);
+      document.getElementById("gstFinalAmountDisplay").textContent = formatINR(totalAmount);
+      document.getElementById("cgstDisplay").textContent = formatINR(cgst);
+      document.getElementById("sgstDisplay").textContent = formatINR(sgst);
+      document.getElementById("igstDisplay").textContent = formatINR(igst);
+
+      // Split breakdown indicators
+      document.getElementById("cgstRow").style.display = isIntraState ? "table-row" : "none";
+      document.getElementById("sgstRow").style.display = isIntraState ? "table-row" : "none";
+      document.getElementById("igstRow").style.display = isIntraState ? "none" : "table-row";
+    };
+
+    [amountInput, rateSelect, customRateInput].forEach(function (el) {
+      if (el) {
+        el.addEventListener("input", calcGST);
+        el.addEventListener("change", calcGST);
+      }
+    });
+
+    document.querySelectorAll("input[name='gstCalcType'], input[name='supplyType']").forEach(function (r) {
+      r.addEventListener("change", calcGST);
+    });
+
+    var copyBtn = document.getElementById("copyGstSummaryBtn");
+    if (copyBtn) {
+      copyBtn.addEventListener("click", function () {
+        var base = document.getElementById("gstBaseDisplay").textContent;
+        var tax = document.getElementById("gstTotalTaxDisplay").textContent;
+        var total = document.getElementById("gstFinalAmountDisplay").textContent;
+        var text = "GST Calculation Summary:\nBase Amount: " + base + "\nTotal GST: " + tax + "\nGrand Total: " + total;
+        navigator.clipboard.writeText(text).then(function () {
+          showToast("GST Summary copied to clipboard!");
+        });
+      });
+    }
+
+    calcGST();
+  };
+
+  // --- 3. GST ITC & RECONCILIATION ENGINE ---
+  var initItcReconciler = function () {
+    var form = document.getElementById("itcForm");
+    if (!form) return;
+
+    var calcItc = function () {
+      // Outward Liability (GSTR-3B)
+      var outIgst = parseNum(document.getElementById("outIgst").value);
+      var outCgst = parseNum(document.getElementById("outCgst").value);
+      var outSgst = parseNum(document.getElementById("outSgst").value);
+
+      // Input Tax Credit Available (GSTR-2B)
+      var itcIgst = parseNum(document.getElementById("itcIgst").value);
+      var itcCgst = parseNum(document.getElementById("itcCgst").value);
+      var itcSgst = parseNum(document.getElementById("itcSgst").value);
+
+      // Set-off Rules:
+      // 1. IGST credit first used for IGST liability, then CGST, then SGST.
+      var remItcIgst = itcIgst;
+      var remOutIgst = outIgst;
+
+      var setOffIgstWithIgst = Math.min(remOutIgst, remItcIgst);
+      remOutIgst -= setOffIgstWithIgst;
+      remItcIgst -= setOffIgstWithIgst;
+
+      var remOutCgst = outCgst;
+      var setOffCgstWithIgst = Math.min(remOutCgst, remItcIgst);
+      remOutCgst -= setOffCgstWithIgst;
+      remItcIgst -= setOffCgstWithIgst;
+
+      var remOutSgst = outSgst;
+      var setOffSgstWithIgst = Math.min(remOutSgst, remItcIgst);
+      remOutSgst -= setOffSgstWithIgst;
+      remItcIgst -= setOffSgstWithIgst;
+
+      // 2. CGST credit used for remaining CGST, then IGST (if any).
+      var remItcCgst = itcCgst;
+      var setOffCgstWithCgst = Math.min(remOutCgst, remItcCgst);
+      remOutCgst -= setOffCgstWithCgst;
+      remItcCgst -= setOffCgstWithCgst;
+
+      var setOffIgstWithCgst = Math.min(remOutIgst, remItcCgst);
+      remOutIgst -= setOffIgstWithCgst;
+      remItcCgst -= setOffIgstWithCgst;
+
+      // 3. SGST credit used for remaining SGST, then IGST (if any).
+      var remItcSgst = itcSgst;
+      var setOffSgstWithSgst = Math.min(remOutSgst, remItcSgst);
+      remOutSgst -= setOffSgstWithSgst;
+      remItcSgst -= setOffSgstWithSgst;
+
+      var setOffIgstWithSgst = Math.min(remOutIgst, remItcSgst);
+      remOutIgst -= setOffIgstWithSgst;
+      remItcSgst -= setOffIgstWithSgst;
+
+      var totalCashPayable = remOutIgst + remOutCgst + remOutSgst;
+      var totalCreditBalance = remItcIgst + remItcCgst + remItcSgst;
+
+      document.getElementById("netCashIgst").textContent = formatINR(remOutIgst);
+      document.getElementById("netCashCgst").textContent = formatINR(remOutCgst);
+      document.getElementById("netCashSgst").textContent = formatINR(remOutSgst);
+      document.getElementById("totalCashPayableDisplay").textContent = formatINR(totalCashPayable);
+
+      document.getElementById("remItcIgst").textContent = formatINR(remItcIgst);
+      document.getElementById("remItcCgst").textContent = formatINR(remItcCgst);
+      document.getElementById("remItcSgst").textContent = formatINR(remItcSgst);
+      document.getElementById("totalBalanceItcDisplay").textContent = formatINR(totalCreditBalance);
+    };
+
+    form.querySelectorAll("input").forEach(function (input) {
+      input.addEventListener("input", calcItc);
+    });
+
+    calcItc();
+  };
+
+  // --- 4. GST INTEREST & LATE FEE (Section 50) ---
+  var initInterestLateFee = function () {
+    var netTaxInput = document.getElementById("netCashLiability");
+    var delayDaysInput = document.getElementById("delayDays");
+    var isNilReturn = document.getElementById("nilReturnCheck");
+    var turnoverSelect = document.getElementById("turnoverSlab");
+
+    if (!netTaxInput) return;
+
+    var calcInterest = function () {
+      var netTax = parseNum(netTaxInput.value);
+      var days = parseNum(delayDaysInput.value);
+      var isNil = isNilReturn.checked;
+
+      // Interest @ 18% p.a. on net cash tax liability
+      var annualRate = 0.18;
+      var interest = (netTax * annualRate * days) / 365;
+
+      // Late Fee:
+      // Nil return: ₹20/day (₹10 CGST + ₹10 SGST), max ₹500
+      // Normal return: ₹50/day (₹25 CGST + ₹25 SGST)
+      // Caps based on turnover:
+      // <= 1.5 Cr: Max ₹2,000 (₹1,000 CGST + ₹1,000 SGST)
+      // 1.5 - 5 Cr: Max ₹5,000 (₹2,500 CGST + ₹2,500 SGST)
+      // > 5 Cr: Max ₹10,000 (₹5,000 CGST + ₹5,000 SGST)
+      var dailyFee = isNil ? 20 : 50;
+      var calculatedLateFee = days * dailyFee;
+      var maxCap = 10000;
+
+      if (isNil) {
+        maxCap = 500;
+      } else {
+        var turnover = turnoverSelect.value;
+        if (turnover === "low") maxCap = 2000;
+        else if (turnover === "mid") maxCap = 5000;
+        else maxCap = 10000;
+      }
+
+      var finalLateFee = Math.min(calculatedLateFee, maxCap);
+      var totalDue = interest + finalLateFee;
+
+      document.getElementById("interestAmountDisplay").textContent = formatINR(interest);
+      document.getElementById("lateFeeDisplay").textContent = formatINR(finalLateFee);
+      document.getElementById("totalPenaltyDisplay").textContent = formatINR(totalDue);
+    };
+
+    [netTaxInput, delayDaysInput, isNilReturn, turnoverSelect].forEach(function (el) {
+      if (el) {
+        el.addEventListener("input", calcInterest);
+        el.addEventListener("change", calcInterest);
+      }
+    });
+
+    calcInterest();
+  };
+
+  // --- 5. TDS & TCS MASTER RATE CHECKER ---
+  var tdsData = [
+    { sec: "192", name: "Salary", threshold: "Basic Exemption Limit", indRate: "Slab Rates", firmRate: "Slab Rates", noPan: "30%" },
+    { sec: "194A", name: "Interest other than on Securities (Banks)", threshold: "₹40,000 (₹50k Senior Citizens)", indRate: "10%", firmRate: "10%", noPan: "20%" },
+    { sec: "194C", name: "Payment to Contractors / Subcontractors", threshold: "₹30,000 single / ₹1,00,000 aggregate", indRate: "1%", firmRate: "2%", noPan: "20%" },
+    { sec: "194H", name: "Commission or Brokerage", threshold: "₹15,000", indRate: "2%", firmRate: "2%", noPan: "20%" },
+    { sec: "194I(a)", name: "Rent of Plant, Machinery or Equipment", threshold: "₹2,40,000 p.a.", indRate: "2%", firmRate: "2%", noPan: "20%" },
+    { sec: "194I(b)", name: "Rent of Land, Building or Furniture", threshold: "₹2,40,000 p.a.", indRate: "10%", firmRate: "10%", noPan: "20%" },
+    { sec: "194J(a)", name: "Fees for Technical Services (FTS) / Call Center", threshold: "₹30,000", indRate: "2%", firmRate: "2%", noPan: "20%" },
+    { sec: "194J(b)", name: "Professional Fees / Royalty / Director Remun.", threshold: "₹30,000", indRate: "10%", firmRate: "10%", noPan: "20%" },
+    { sec: "194Q", name: "TDS on Purchase of Goods (Turnover > 10 Cr)", threshold: "₹50,00,000 in FY", indRate: "0.1%", firmRate: "0.1%", noPan: "5%" },
+    { sec: "206C(1H)", name: "TCS on Sale of Goods (Turnover > 10 Cr)", threshold: "₹50,00,000 in FY", indRate: "0.1%", firmRate: "0.1%", noPan: "1%" },
+    { sec: "194R", name: "Benefit or Perquisite in respect of Business", threshold: "₹20,000", indRate: "10%", firmRate: "10%", noPan: "20%" },
+    { sec: "194S", name: "Payment on Transfer of Virtual Digital Assets (Crypto)", threshold: "₹50,000 (Specified) / ₹10,000", indRate: "1%", firmRate: "1%", noPan: "20%" }
+  ];
+
+  var initTdsMaster = function () {
+    var tableBody = document.getElementById("tdsTableBody");
+    var searchInput = document.getElementById("tdsSearchInput");
+    if (!tableBody) return;
+
+    var renderRows = function (query) {
+      if (!query) query = "";
+      tableBody.innerHTML = "";
+      var q = query.toLowerCase().trim();
+      var filtered = tdsData.filter(function (item) {
+        return item.sec.toLowerCase().indexOf(q) !== -1 || item.name.toLowerCase().indexOf(q) !== -1;
+      });
+
+      if (filtered.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="6" class="text-center" style="padding: 1.5rem; color: var(--text-dim);">No matching TDS/TCS sections found.</td></tr>';
+        return;
+      }
+
+      filtered.forEach(function (item) {
+        var tr = document.createElement("tr");
+        tr.innerHTML =
+          '<td><strong style="color: var(--primary);">' + item.sec + '</strong></td>' +
+          '<td>' + item.name + '</td>' +
+          '<td>' + item.threshold + '</td>' +
+          '<td class="font-mono text-center">' + item.indRate + '</td>' +
+          '<td class="font-mono text-center">' + item.firmRate + '</td>' +
+          '<td class="font-mono text-center" style="color: var(--danger); font-weight: 700;">' + item.noPan + '</td>';
+        tableBody.appendChild(tr);
+      });
+    };
+
+    if (searchInput) {
+      searchInput.addEventListener("input", function (e) {
+        renderRows(e.target.value);
+      });
+    }
+    renderRows();
+  };
+
+  // --- 6. GST INVOICE GENERATOR ---
+  var initInvoiceGenerator = function () {
+    var linesContainer = document.getElementById("invoiceItemsBody");
+    var addLineBtn = document.getElementById("addInvoiceItemBtn");
+    var printBtn = document.getElementById("printInvoiceBtn");
+
+    if (!linesContainer) return;
+
+    var rowCount = 0;
+
+    var updateInvoiceTotals = function () {
+      var subtotal = 0;
+      var totalGst = 0;
+
+      var rows = linesContainer.querySelectorAll("tr");
+      rows.forEach(function (row) {
+        var qtyInput = row.querySelector(".item-qty");
+        var rateInput = row.querySelector(".item-rate");
+        var taxInput = row.querySelector(".item-tax");
+
+        var qty = qtyInput ? parseNum(qtyInput.value) : 0;
+        var rate = rateInput ? parseNum(rateInput.value) : 0;
+        var taxPercent = taxInput ? parseNum(taxInput.value) : 0;
+
+        var lineAmount = qty * rate;
+        var lineTax = lineAmount * (taxPercent / 100);
+
+        var totalCell = row.querySelector(".item-total");
+        if (totalCell) {
+          totalCell.textContent = formatINR(lineAmount + lineTax);
+        }
+
+        subtotal += lineAmount;
+        totalGst += lineTax;
+      });
+
+      var grandTotal = subtotal + totalGst;
+
+      var subDisplay = document.getElementById("invSubtotalDisplay");
+      var gstDisplay = document.getElementById("invGstDisplay");
+      var grandDisplay = document.getElementById("invGrandTotalDisplay");
+
+      if (subDisplay) subDisplay.textContent = formatINR(subtotal);
+      if (gstDisplay) gstDisplay.textContent = formatINR(totalGst);
+      if (grandDisplay) grandDisplay.textContent = formatINR(grandTotal);
+    };
+
+    var addLineRow = function (desc, hsn, qty, rate, taxRate) {
+      if (!desc) desc = "Tax Consultancy / Professional Services";
+      if (!hsn) hsn = "998311";
+      if (!qty) qty = 1;
+      if (!rate) rate = 5000;
+      if (taxRate === undefined) taxRate = 18;
+
+      rowCount++;
+      var tr = document.createElement("tr");
+      tr.id = "invoice-row-" + rowCount;
+      tr.innerHTML =
+        '<td><input type="text" class="form-input item-desc" value="' + desc + '"></td>' +
+        '<td><input type="text" class="form-input item-hsn font-mono" value="' + hsn + '"></td>' +
+        '<td><input type="number" class="form-input item-qty font-mono text-right" min="1" value="' + qty + '"></td>' +
+        '<td><input type="number" class="form-input item-rate font-mono text-right" min="0" value="' + rate + '"></td>' +
+        '<td>' +
+          '<select class="form-select item-tax font-mono">' +
+            '<option value="0"' + (taxRate === 0 ? " selected" : "") + '>0%</option>' +
+            '<option value="5"' + (taxRate === 5 ? " selected" : "") + '>5%</option>' +
+            '<option value="12"' + (taxRate === 12 ? " selected" : "") + '>12%</option>' +
+            '<option value="18"' + (taxRate === 18 ? " selected" : "") + '>18%</option>' +
+            '<option value="28"' + (taxRate === 28 ? " selected" : "") + '>28%</option>' +
+          '</select>' +
+        '</td>' +
+        '<td class="item-total font-mono text-right" style="font-weight: 700;">₹0.00</td>' +
+        '<td class="text-center"><button class="btn btn-sm btn-danger remove-item-btn" type="button">✕</button></td>';
+
+      var removeBtn = tr.querySelector(".remove-item-btn");
+      if (removeBtn) {
+        removeBtn.addEventListener("click", function () {
+          if (linesContainer.children.length > 1) {
+            tr.remove();
+            updateInvoiceTotals();
+          } else {
+            showToast("Invoice must contain at least one item", "danger");
+          }
+        });
+      }
+
+      tr.querySelectorAll("input, select").forEach(function (el) {
+        el.addEventListener("input", updateInvoiceTotals);
+        el.addEventListener("change", updateInvoiceTotals);
+      });
+
+      linesContainer.appendChild(tr);
+      updateInvoiceTotals();
+    };
+
+    if (addLineBtn) {
+      addLineBtn.addEventListener("click", function () {
+        addLineRow();
+      });
+    }
+
+    if (printBtn) {
+      printBtn.addEventListener("click", function () {
+        window.print();
+      });
+    }
+
+    // Populate initial rows
+    addLineRow("Tax Audit & Return Filing Services", "998231", 1, 15000, 18);
+    addLineRow("GST Annual Return & Reconciliation (9C)", "998232", 1, 10000, 18);
+  };
+
+  // --- 7. REPORTS & HISTORY ---
+  var saveHistory = function (toolName, details) {
+    var history = [];
+    try {
+      history = JSON.parse(localStorage.getItem("crazy_tax_history") || "[]");
+    } catch (e) {
+      history = [];
+    }
+    var entry = {
+      id: Date.now(),
+      tool: toolName,
+      details: details,
+      time: new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" }),
+      date: new Date().toLocaleDateString("en-IN"),
+    };
+    history.unshift(entry);
+    if (history.length > 50) history.pop();
+    localStorage.setItem("crazy_tax_history", JSON.stringify(history));
+    renderHistory();
+  };
+
+  var renderHistory = function () {
+    var list = document.getElementById("historyList");
+    if (!list) return;
+    var history = [];
+    try {
+      history = JSON.parse(localStorage.getItem("crazy_tax_history") || "[]");
+    } catch (e) {
+      history = [];
+    }
+
+    if (history.length === 0) {
+      list.innerHTML = '<li style="padding: 1rem; color: var(--text-dim); text-align: center;">No calculations recorded yet.</li>';
+      return;
+    }
+
+    list.innerHTML = "";
+    history.slice(0, 10).forEach(function (item) {
+      var li = document.createElement("li");
+      li.className = "feature-tile";
+      li.style.marginBottom = "0.5rem";
+      li.innerHTML =
+        '<div style="display: flex; justify-content: space-between; align-items: center;">' +
+          '<strong style="color: var(--primary);">' + item.tool + '</strong>' +
+          '<span style="font-size: 0.75rem; color: var(--text-dim);">' + item.date + " " + item.time + '</span>' +
+        '</div>' +
+        '<div style="font-size: 0.85rem; color: var(--text-muted);">' + item.details + '</div>';
+      list.appendChild(li);
+    });
+  };
+
+  var initReports = function () {
+    renderHistory();
+    var clearBtn = document.getElementById("clearHistoryBtn");
+    if (clearBtn) {
+      clearBtn.addEventListener("click", function () {
+        localStorage.removeItem("crazy_tax_history");
+        renderHistory();
+        showToast("Calculation history cleared");
+      });
+    }
+
+    var exportBtn = document.getElementById("exportCsvBtn");
+    if (exportBtn) {
+      exportBtn.addEventListener("click", function () {
+        var history = [];
+        try {
+          history = JSON.parse(localStorage.getItem("crazy_tax_history") || "[]");
+        } catch (e) {
+          history = [];
+        }
+        if (history.length === 0) {
+          showToast("No history to export", "danger");
+          return;
+        }
+        var csv = "Date,Time,Tool,Details\n";
+        history.forEach(function (h) {
+          csv += '"' + h.date + '","' + h.time + '","' + h.tool + '","' + h.details.replace(/"/g, '""') + '"\n';
+        });
+        var blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = "tax-calculations-" + Date.now() + ".csv";
+        a.click();
+        showToast("Exported history to CSV");
+      });
+    }
+
+    // Notes Scratchpad Auto-save
+    var notes = document.getElementById("taxNotesArea");
+    if (notes) {
+      notes.value = localStorage.getItem("crazy_tax_notes") || "";
+      notes.addEventListener("input", function () {
+        localStorage.setItem("crazy_tax_notes", notes.value);
+      });
+    }
+  };
+
+  // --- INITIALIZATION ---
+  document.addEventListener("DOMContentLoaded", function () {
+    initNavigation();
+    initTheme();
+    initIncomeTax();
+    initGstCalculator();
+    initItcReconciler();
+    initInterestLateFee();
+    initTdsMaster();
+    initInvoiceGenerator();
+    initReports();
+  });
+})();
+
+  </script>
 </body>
 </html>
