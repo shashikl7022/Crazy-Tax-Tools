@@ -1,36 +1,40 @@
 @echo off
 title Push Crazy Tax Tools to GitHub
-echo ========================================================
-echo Pushing Crazy Tax Tools to https://github.com/shashikl7022/Crazy-Tax-Tools
-echo ========================================================
+color 0b
+echo ======================================================================
+echo           CRAZY TAX TOOLS - PUSH TO GITHUB WORKSTATION
+echo ======================================================================
+echo.
+echo Target Repository: https://github.com/shashikl7022/Crazy-Tax-Tools
 echo.
 
 set PATH=C:\Users\MOJB-D085-Shashidhar\AppData\Local\Programs\Git\cmd;%PATH%
 cd /d "C:\Users\MOJB-D085-Shashidhar\.gemini\antigravity\scratch\Crazy-Tax-Tools"
 
 echo Checking Git status...
-git status
+git status -s
 
 echo.
-echo Pushing to GitHub (A browser window may open to verify your GitHub login)...
+echo [1/2] Pushing latest code to GitHub (main branch)...
+echo If prompted, please click "Authorize" or sign in with your GitHub account in the browser.
+echo.
 git push -u origin main --force
 
 if %errorlevel% equ 0 (
     echo.
-    echo ========================================================
-    echo SUCCESS! All files have been pushed to your GitHub repo.
+    echo ======================================================================
+    echo [SUCCESS] All files successfully uploaded to GitHub!
     echo.
-    echo Opening GitHub Pages Settings in your browser...
-    echo In GitHub Pages Settings:
-    echo 1. Set Branch to 'main' and folder to '/ (root)'
-    echo 2. Click 'Save'
-    echo 3. Your website will be live at:
-    echo    https://shashikl7022.github.io/Crazy-Tax-Tools/
-    echo ========================================================
-    start https://github.com/shashikl7022/Crazy-Tax-Tools/settings/pages
+    echo [2/2] Opening your live website:
+    echo https://shashikl7022.github.io/Crazy-Tax-Tools/
+    echo ======================================================================
+    start https://shashikl7022.github.io/Crazy-Tax-Tools/
 ) else (
     echo.
-    echo An error occurred during push. Please check your internet connection or GitHub credentials.
+    echo [ERROR] Push failed. If authentication failed, you can also upload files
+    echo directly via your browser at:
+    echo https://github.com/shashikl7022/Crazy-Tax-Tools/upload/main
+    start https://github.com/shashikl7022/Crazy-Tax-Tools/upload/main
 )
 
 echo.
